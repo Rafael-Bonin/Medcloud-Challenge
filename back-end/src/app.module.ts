@@ -7,10 +7,11 @@ import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     PatientModule,
     EmployeeModule,
-    PrismaModule],
+    PrismaModule,
+  ],
 })
 export class AppModule {}
