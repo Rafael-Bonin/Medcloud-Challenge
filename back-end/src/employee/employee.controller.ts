@@ -7,7 +7,6 @@ export class EmployeeController {
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
   async getMe(@Req() req: Request) {
-    console.log({ user: req.user });
-    return 'info';
+    return req.user
   }
 }
