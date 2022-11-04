@@ -14,7 +14,7 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async login(data: AuthLoginDto) {
+  async login(data: AuthLoginDto): Promise<{ token: string }> {
     try {
       const user = await this.employeeRepository.getMe(data.email);
       if (!user) throw new ForbiddenException('Email or password incorrect');
@@ -27,7 +27,7 @@ export class AuthService {
     }
   }
 
-  async signup(data: AuthDto) {
+  async signup(data: AuthDto): Promise<{ token: string }> {
     try {
       const hash = await argon.hash(data.password);
       data.password = hash;

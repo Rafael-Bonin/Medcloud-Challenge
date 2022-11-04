@@ -1,4 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Patient } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PatientDto } from './dto';
 import { PatientRepository } from './patient.repository';
@@ -7,12 +8,12 @@ import { PatientRepository } from './patient.repository';
 export class PatientService {
   constructor(private patientRepository: PatientRepository) {}
 
-  async getAll() {
+  async getAll(): Promise<Patient[]> {
     const allPatients = await this.patientRepository.getAll();
     return allPatients;
   }
 
-  async createPatient(data: PatientDto) {
+  async createPatient(data: PatientDto): Promise<Patient> {
     try {
       const { name, birth_date, email, address } = data;
       const patient = await this.patientRepository.createPatient(
@@ -32,12 +33,12 @@ export class PatientService {
     }
   }
 
-  async deletePatient(id: number) {
+  async deletePatient(id: number): Promise<Patient> {
     const patient = await this.patientRepository.deletePatient(id);
     return patient;
   }
 
-  async updatePatient(id: number, data: PatientDto) {
+  async updatePatient(id: number, data: PatientDto): Promise<Patient> {
     const patient = await this.patientRepository.updatePatient(id, data);
     return patient;
   }
