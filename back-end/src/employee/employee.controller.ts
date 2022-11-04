@@ -22,7 +22,10 @@ export class EmployeeController {
   constructor(private employeeService: EmployeeService) {}
 
   @Post()
-  async createEmployee(@Body() data: EmployeeDto, @GetUser() user: Employee): Promise<Employee> {
+  async createEmployee(
+    @Body() data: EmployeeDto,
+    @GetUser() user: Employee,
+  ): Promise<Employee> {
     const me = await this.getMe(user);
     if (me.role !== 'admin') throw new UnauthorizedException();
     const employee = await this.employeeService.createEmployee(data);
