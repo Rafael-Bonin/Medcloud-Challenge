@@ -15,6 +15,7 @@ CREATE TABLE `employees` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
+    `role` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `employees_email_key`(`email`),

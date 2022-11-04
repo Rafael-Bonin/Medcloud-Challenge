@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     const user = await this.prisma.employee.findUnique({
       where: { id: data.sub },
     });
-    delete user.password;
+    if (user?.password) delete user.password;
     return user;
   }
 }

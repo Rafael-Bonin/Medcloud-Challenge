@@ -30,11 +30,8 @@ export class AuthService {
   async signup(data: AuthDto) {
     try {
       const hash = await argon.hash(data.password);
-      const user = await this.employeeRepository.createEmp(
-        data.email,
-        data.name,
-        hash,
-      );
+      data.password = hash;
+      const user = await this.employeeRepository.createEmp({ ...data });
       return this.signToken(user.id, user.email, user.name);
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
