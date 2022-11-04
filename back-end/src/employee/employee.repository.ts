@@ -42,6 +42,7 @@ export class EmployeeRepository {
 
   async delete(id: number): Promise<Employee> {
     const employee = await this.prisma.employee.delete({ where: { id } });
+    delete employee.password
     return employee;
   }
 }
